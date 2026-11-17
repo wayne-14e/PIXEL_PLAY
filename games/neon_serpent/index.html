@@ -78,7 +78,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .chip b{font-family:var(--px);font-size:7px;color:var(--c)}
 .chip .t{font-family:var(--vt);font-size:15px;color:var(--text);min-width:26px;text-align:right}
 .chip .bar{position:absolute;left:0;bottom:0;height:2px;background:var(--c);width:100%}
-.screenwrap{position:relative;width:min(100%,max(300px,calc(100vh - 356px)),620px);width:min(100%,max(300px,calc(100dvh - 356px)),620px);aspect-ratio:1/1;margin:0 auto;background:#070313;border:2px solid var(--mode);box-shadow:0 0 26px color-mix(in srgb,var(--mode) 32%,transparent),inset 0 0 60px rgba(0,0,0,.65);overflow:hidden;transition:border-color .4s,box-shadow .4s}
+.screenwrap{position:relative;width:min(100%,max(390px,calc(130vh - 462.8px)),806px);width:min(100%,max(390px,calc(130dvh - 462.8px)),806px);aspect-ratio:1/1;margin:0 auto;background:#070313;border:2px solid var(--mode);box-shadow:0 0 26px color-mix(in srgb,var(--mode) 32%,transparent),inset 0 0 60px rgba(0,0,0,.65);overflow:hidden;transition:border-color .4s,box-shadow .4s}
 .shaker{position:absolute;inset:0}
 #game{display:block;width:100%;height:100%;image-rendering:pixelated;touch-action:none}
 .fx-scan,.fx-rgb,.fx-vignette,.fx-sweep,.flash{position:absolute;inset:0;pointer-events:none}
@@ -153,10 +153,6 @@ body.touch .dpad{display:grid}
 .dbtn.mid:active{background:var(--amber)}
 .tri{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:13px solid currentColor}
 .dbtn.right .tri{transform:rotate(90deg)}.dbtn.down .tri{transform:rotate(180deg)}.dbtn.left .tri{transform:rotate(-90deg)}
-.ticker{margin-top:12px;border-top:1px solid var(--line);overflow:hidden;padding:7px 0 9px}
-.ticker-track{display:flex;width:max-content;animation:tick 28s linear infinite}
-.ticker-track span{font-family:var(--vt);font-size:17px;color:#7d70ad;white-space:nowrap;padding-right:70px}
-@keyframes tick{to{transform:translateX(-50%)}}
 .sidebar{display:flex;flex-direction:column;gap:14px}
 .panel{position:relative;background:linear-gradient(180deg,rgba(23,11,52,.85),rgba(9,4,26,.92));border:1px solid var(--line);padding:13px 14px;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .panel::before{content:"";position:absolute;top:-1px;left:-1px;width:12px;height:12px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
@@ -188,9 +184,9 @@ body.touch .dpad{display:grid}
 .kcap{font-family:var(--vt);font-size:15px;color:var(--text);border:1px solid #5b4b96;background:#170b33;padding:1px 7px;box-shadow:0 2px 0 #000;min-width:24px;text-align:center}
 footer{position:relative;z-index:1;text-align:center;font-family:var(--vt);font-size:15px;color:#5c5384;padding:14px 16px 22px}
 footer b{color:var(--magenta);font-weight:normal}
-@media(max-width:1020px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;align-items:start}.screenwrap{width:min(100%,560px)}}
+@media(max-width:1020px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;align-items:start}.screenwrap{width:min(100%,728px)}}
 @media(max-width:640px){.sidebar{grid-template-columns:1fr}.hud{grid-template-columns:repeat(2,1fr)}.stat span{font-size:24px}.brand{font-size:10px}.ver{display:none}.marquee{flex-wrap:wrap}.pxbtn.tiny{font-size:7px;padding:7px 8px}.layout{padding:0 10px;margin-top:12px}.cabinet{padding:10px 10px 0}.count-num{font-size:42px}.menu-inner{padding:16px;gap:12px}.menu-title{font-size:11px}.menu-sub{font-size:7px}.mode-grid{gap:9px}.mode-card{padding:10px;min-height:0;gap:5px}.mc-top canvas{width:24px;height:24px}.mc-name{font-size:8px}.mc-desc{font-size:15px}.mc-best{font-size:14px}.seg button{font-size:7px;padding:10px 4px}.pxbtn.big{font-size:11px;padding:14px 16px}.menu-hint,.menu-feats{font-size:15px}.menu-feats{font-size:14px}}
-@media(prefers-reduced-motion:reduce){.bg-aurora,.bg-grid,.fx-sweep,.ticker-track,.glitch::before,.glitch::after,.start-pulse{animation:none}}
+@media(prefers-reduced-motion:reduce){.bg-aurora,.bg-grid,.fx-sweep,.glitch::before,.glitch::after,.start-pulse{animation:none}}
 </style>
 </head>
 <body>
@@ -297,7 +293,6 @@ footer b{color:var(--magenta);font-weight:normal}
     </div>
     </div>
 
-    <div class="ticker"><div class="ticker-track" id="tickerTrack"><span></span><span></span></div></div>
   </section>
 
   <aside class="sidebar">
@@ -366,7 +361,7 @@ const TIPS=['Chain bites within 5s to stack a x8 score multiplier.','AEGIS shiel
 
 const cv=$('game'),ctx=cv.getContext('2d');
 const els={};
-['shaker','screenwrap','flash','banner','bannerText','bannerSub','countOverlay','countNum','countSub','menuOverlay','modeGrid','diffSeg','startBtn','pauseOverlay','resumeBtn','restartBtn','quitBtn','pauseScore','pauseLen','overOverlay','overTitle','overCause','recordBadge','osScore','osBest','osLen','osSector','osChain','retryBtn','menuBtn','overTip','hudScore','hudBest','hudSector','hudLen','hudSpeed','comboLabel','comboFill','comboWrap','fxRow','fxEmpty','modeChip','pauseBtn','sndBtn','fsBtn','dpadPause','tickerTrack','demoTag','protoName','protoDesc','protoBest','protoRuns','protoLast','powerLegend','board','boardMode','cabinet'].forEach(k=>{els[k]=$(k);});
+['shaker','screenwrap','flash','banner','bannerText','bannerSub','countOverlay','countNum','countSub','menuOverlay','modeGrid','diffSeg','startBtn','pauseOverlay','resumeBtn','restartBtn','quitBtn','pauseScore','pauseLen','overOverlay','overTitle','overCause','recordBadge','osScore','osBest','osLen','osSector','osChain','retryBtn','menuBtn','overTip','hudScore','hudBest','hudSector','hudLen','hudSpeed','comboLabel','comboFill','comboWrap','fxRow','fxEmpty','modeChip','pauseBtn','sndBtn','fsBtn','dpadPause','demoTag','protoName','protoDesc','protoBest','protoRuns','protoLast','powerLegend','board','boardMode','cabinet'].forEach(k=>{els[k]=$(k);});
 
 let selMode=store.get('ns_mode','classic');if(!MODES[selMode])selMode='classic';
 let selDiff=store.get('ns_diff','standard');if(!DIFFS[selDiff])selDiff='standard';
@@ -1036,12 +1031,11 @@ function buildLegend(){
 function selectMode(id){
  selMode=id;store.set('ns_mode',id);
  els.modeGrid.querySelectorAll('.mode-card').forEach(c=>c.classList.toggle('sel',c.dataset.mode===id));
- updateProtocol();renderBoard();tickerUpdate();applyTheme();updateHUD(0);
+ updateProtocol();renderBoard();applyTheme();updateHUD(0);
 }
 function selectDiff(id){
  selDiff=id;store.set('ns_diff',id);
  els.diffSeg.querySelectorAll('button').forEach(b=>b.classList.toggle('sel',b.dataset.diff===id));
- tickerUpdate();
 }
 function renderBoard(){
  const mode=S.demo?selMode:S.mode;
@@ -1076,14 +1070,6 @@ function updateProtocol(){
  els.protoRuns.textContent=String(store.get('ns_runs_'+mode,0));
  els.protoLast.textContent=String(store.get('ns_last_'+mode,0));
 }
-function tickerUpdate(){
- const mode=S.demo?selMode:S.mode;
- const m=MODES[mode];
- const txt='>> '+m.name+' PROTOCOL // '+m.tag+' // BEST '+pad(store.get('ns_best_'+mode,0))+' // '+DIFFS[S.demo?selDiff:S.diff].label+' CLOCK // CHAIN x8 MAX // POWER CELLS ARMED // INSERT COIN TO CONTINUE ';
- els.tickerTrack.children[0].textContent=txt;
- els.tickerTrack.children[1].textContent=txt;
-}
-
 /* ---------- flow ---------- */
 function syncPauseBtn(){
  let t='II',label='Pause';
@@ -1105,7 +1091,7 @@ function startRun(){
  setCount('3','SYNCING GRID');
  sfx.count();duck(.14);
  flash(MODES[S.mode].accent,.22);
- updateProtocol();renderBoard();tickerUpdate();syncPauseBtn();
+ updateProtocol();renderBoard();syncPauseBtn();
 }
 function pauseGame(){
  if(S.demo||S.phase!=='playing')return;
@@ -1130,7 +1116,7 @@ function quitToMenu(){
  els.menuOverlay.classList.remove('hidden');
  els.cabinet.classList.add('menu-open');
  duck(.14);
- updateProtocol();renderBoard();tickerUpdate();refreshCardBests();syncPauseBtn();
+ updateProtocol();renderBoard();refreshCardBests();syncPauseBtn();
 }
 function actionPrimary(){
  if(!els.menuOverlay.classList.contains('hidden')){startRun();return;}
@@ -1167,7 +1153,7 @@ function showOver(){
  els.overOverlay.classList.remove('hidden');
  S.phase='over';
  if(rec){confetti();flash('#ffb300',.28);sfx.record();}
- updateProtocol();renderBoard();tickerUpdate();refreshCardBests();updateHUD(0);syncPauseBtn();
+ updateProtocol();renderBoard();refreshCardBests();updateHUD(0);syncPauseBtn();
 }
 
 /* ---------- input ---------- */
@@ -1266,7 +1252,7 @@ buildModeCards();buildDiffSeg();buildLegend();
 selectMode(selMode);selectDiff(selDiff);
 setMuted(muted);
 resetState(true);
-renderBoard();updateProtocol();tickerUpdate();
+renderBoard();updateProtocol();
 if(document.fonts&&document.fonts.load){document.fonts.load('8px "Press Start 2P"').catch(()=>{});}
 requestAnimationFrame(frame);
 })();
