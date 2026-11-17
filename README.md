@@ -15,6 +15,10 @@ python3 -m http.server 8000
 
 Then visit [http://localhost:8000](http://localhost:8000). Serving over HTTP is recommended for cartridge scanning.
 
+## Search engine indexing
+
+The site publishes [`robots.txt`](./robots.txt) and [`sitemap.xml`](./sitemap.xml) for its homepage and six game pages. The canonical and social URLs use `https://pixel-play-beta.vercel.app`; if the production domain changes, update those URLs in the HTML pages and both files. Submit `https://pixel-play-beta.vercel.app/sitemap.xml` in Google Search Console to request indexing.
+
 ## 🕹 Cartridge bay
 
 | Cartridge | Genre | Build |
